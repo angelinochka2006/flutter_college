@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
 
-import 'main1.dart';
+import 'home.dart';
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MainApp1 extends StatelessWidget {
+  const MainApp1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +27,9 @@ class MainApp extends StatelessWidget {
           ),
         ],
         onTap:  (i) {
-           Navigator.push(
+          Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MainApp1()),
+          MaterialPageRoute(builder: (context) => MainApp()),
         );
 
         },
@@ -63,7 +63,7 @@ class MainApp extends StatelessWidget {
             const Expanded(
               child: Center(
                 child: Text(
-                  'ВСЕМ ПРИВЕТ!!!!!!!!!!!!!!!!',
+                  'ВСЕМ ПРИВЕТ',
                   style: TextStyle(fontSize: 18),
                 ),
               ),
