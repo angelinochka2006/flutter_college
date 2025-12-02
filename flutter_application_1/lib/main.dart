@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'home.dart';
+import 'page1.dart';
 
 
 void main() {
+
   runApp(MaterialApp(home: AuthScreen()));
 }
 
@@ -52,7 +53,7 @@ if(email == "lol" && password == "112")
         // Успешный вход
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MainApp()),
+          MaterialPageRoute(builder: (context) => MainApp1()),
         );
  }
  else { print("wrong password");  }     

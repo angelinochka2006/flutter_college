@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/page1.dart';
+import 'package:flutter_application_1/page2.dart';
 
-import 'home.dart';
 
-class MainApp1 extends StatelessWidget {
-  const MainApp1({super.key});
+class MainApp3 extends StatelessWidget {
+  const MainApp3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +28,19 @@ class MainApp1 extends StatelessWidget {
           ),
         ],
         onTap:  (i) {
-          Navigator.push(
+              if(i==0)  {  Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MainApp()),
-        );
+          MaterialPageRoute(builder: (context) => MainApp1()),
+        );  }
+          if(i==1) {  Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MainApp2()),
+        );  }
+          if(i==2) {  Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MainApp3()),
+        );  }
+         
 
         },
         ),
@@ -63,7 +73,7 @@ class MainApp1 extends StatelessWidget {
             const Expanded(
               child: Center(
                 child: Text(
-                  'ВСЕМ ПРИВЕТ',
+                  'ВСЕМ ПРИВЕТ 3',
                   style: TextStyle(fontSize: 18),
                 ),
               ),
