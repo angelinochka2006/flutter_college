@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/page1.dart';
 import 'package:flutter_application_1/page2.dart';
+import 'package:flutter_application_1/page4.dart';
 
 
 class MainApp3 extends StatelessWidget {
@@ -38,7 +39,7 @@ class MainApp3 extends StatelessWidget {
         );  }
           if(i==2) {  Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MainApp3()),
+          MaterialPageRoute(builder: (context) => mapWidget()),
         );  }
          
 
