@@ -1,51 +1,67 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/page2.dart';
 import 'package:flutter_application_1/page3.dart';
-
-import 'main.dart';
 
 class MainApp1 extends StatelessWidget {
   const MainApp1({super.key});
 
   @override
   Widget build(BuildContext context) {
+    int currentIndex = 0;
+
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-         
-        items: [
-         
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Courses',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contact_mail),
-            label: 'Mail',
-          ),
-        ],
-        onTap:  (i) {
-             if(i==0)  {  Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainApp1()),
-        );  }
-          if(i==1) {  Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainApp2()),
-        );  }
-          if(i==2) {  Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainApp3()),
-        );  }
-         
+      bottomNavigationBar: StatefulBuilder(
+        builder: (context, setState) {
+          return BottomNavigationBar(
+            currentIndex: currentIndex,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bookmark),
+                label: 'Courses',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.contact_mail),
+                label: 'Mail',
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+              
+              // Используем Navigator.pushReplacement чтобы избежать накопления страниц
+              switch (index) {
+                case 0:
+                  if (currentIndex != 0) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainApp1()),
+                    );
+                  }
+                  break;
+                case 1:
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainApp2()),
+                  );
+                  break;
+                case 2:
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainApp3()),
+                  );
+                  break;
+              }
+            },
+          );
         },
-        ),
+      ),
       appBar: AppBar(
-        title: const Text('My App'),
+        title: const Text('My App - Home'),
       ),
       body: Center(
         child: Column(
@@ -88,11 +104,3 @@ class MainApp1 extends StatelessWidget {
     );
   }
 }
-
-
-// создаем копию файла
-// переименовываем название класса
-// возвращаемся в этот файл --- 
-// используем навигатор так же как в main , 
-// но используем там класс только что созданного файла, где переименовали класс
-// пробуем добавть if (i==1 или 2 или 3 ) чтоб навигатор срабатывал не на каждом пункте

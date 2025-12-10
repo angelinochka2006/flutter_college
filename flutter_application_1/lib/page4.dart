@@ -1,66 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/page1.dart';
-import 'package:flutter_application_1/page2.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
+class MapWidget extends StatelessWidget {
+  const MapWidget({super.key});
 
-
-class mapWidget extends StatelessWidget {
-
-
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-       bottomNavigationBar: BottomNavigationBar(
-         
-        items: [
-         
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Карта'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: FlutterMap(
+        options: MapOptions(
+          initialCenter: LatLng(55.7558, 37.6173), // Москва
+          initialZoom: 10,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.app',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Courses',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contact_mail),
-            label: 'Mail',
+          MarkerLayer(
+            markers: [
+              Marker(
+                width: 80.0,
+                height: 80.0,
+                point: LatLng(55.7558, 37.6173),
+                child: Icon(Icons.location_on, color: Colors.red, size: 40),
+              ),
+            ],
           ),
         ],
-        onTap:  (i) {
-              if(i==0)  {  Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainApp1()),
-        );  }
-          if(i==1) {  Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainApp2()),
-        );  }
-          if(i==2) {  Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => mapWidget()),
-        );  }
-         
-
-        },
-        ),
-    
-    body: FlutterMap(
-    options: MapOptions(
-      initialCenter: LatLng(51.509364, -0.128928), // Center the map over London
-      initialZoom: 9.2,
-    ),
-    children: [
-      TileLayer( // Bring your own tiles
-        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', // For demonstration only
-        userAgentPackageName: 'com.example.app', // Add your app identifier
-        // And many more recommended properties!
       ),
-  
-    ],
-   ) );
-}
-
+    );
+  }
 }

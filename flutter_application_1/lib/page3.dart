@@ -1,52 +1,74 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/page1.dart';
 import 'package:flutter_application_1/page2.dart';
 import 'package:flutter_application_1/page4.dart';
-
 
 class MainApp3 extends StatelessWidget {
   const MainApp3({super.key});
 
   @override
   Widget build(BuildContext context) {
+    int currentIndex = 2;
+
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-         
-        items: [
-         
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Courses',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contact_mail),
-            label: 'Mail',
+      bottomNavigationBar: StatefulBuilder(
+        builder: (context, setState) {
+          return BottomNavigationBar(
+            currentIndex: currentIndex,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bookmark),
+                label: 'Courses',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.map),
+                label: 'Map',
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+              
+              switch (index) {
+                case 0:
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainApp1()),
+                  );
+                  break;
+                case 1:
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainApp2()),
+                  );
+                  break;
+                case 2:
+                  // Уже на карте, ничего не делаем
+                  break;
+              }
+            },
+          );
+        },
+      ),
+      appBar: AppBar(
+        title: const Text('My App - Mail'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.map),
+            onPressed: () {
+              // Однократный переход на карту
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MapWidget()),
+              );
+            },
           ),
         ],
-        onTap:  (i) {
-              if(i==0)  {  Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainApp1()),
-        );  }
-          if(i==1) {  Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainApp2()),
-        );  }
-          if(i==2) {  Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => mapWidget()),
-        );  }
-         
-
-        },
-        ),
-      appBar: AppBar(
-        title: const Text('My App'),
       ),
       body: Center(
         child: Column(
@@ -79,6 +101,16 @@ class MainApp3 extends StatelessWidget {
                 ),
               ),
             ),
+            ElevatedButton(
+              onPressed: () {
+                // Однократный переход на карту
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MapWidget()),
+                );
+              },
+              child: Text('Перейти на карту'),
+            ),
           ],
         ),
       ),
@@ -89,11 +121,3 @@ class MainApp3 extends StatelessWidget {
     );
   }
 }
-
-
-// создаем копию файла
-// переименовываем название класса
-// возвращаемся в этот файл --- 
-// используем навигатор так же как в main , 
-// но используем там класс только что созданного файла, где переименовали класс
-// пробуем добавть if (i==1 или 2 или 3 ) чтоб навигатор срабатывал не на каждом пункте
